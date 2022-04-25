@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Matrix {
     public Scanner scan = new Scanner(System.in);
-    public int matrix1[][], matrix2[][], sum[][], multi[][], trans[][];
+    public int matrix1[][], matrix2[][], sum[][], multi[][];
     public int row, column;
     public Random random = new Random();
 
@@ -12,13 +12,11 @@ public class Matrix {
         row = Integer.parseInt(scan.nextLine());
         System.out.println("Введите количество столбцов: ");
         column = Integer.parseInt(scan.nextLine());
-        ;
 
         matrix1 = new int[row][column];
         matrix2 = new int[row][column];
         sum = new int[row][column];
         multi = new int[row][column];
-        trans = new int[row][column];
 
         // Заполнение 1-й матрицы
         for (int i = 0; i < row; i++) {
