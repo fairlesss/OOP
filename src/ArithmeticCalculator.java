@@ -1,48 +1,32 @@
 public class ArithmeticCalculator {
-    private double a;
-    private double b;
+    private double number;
 
-    public ArithmeticCalculator(double a, double b) {
-        this.a = a;
-        this.b = b;
+    public ArithmeticCalculator(double number) {
+        this.number = number;
     }
 
-    public void addition() {
-        double res = a + b;
-        System.out.println(a + " + " + b + " = " + res);
+    public ArithmeticCalculator addition(ArithmeticCalculator a) {
+        return new ArithmeticCalculator(number + a.number);
     }
 
-    public void subtraction() {
-        double res = a - b;
-        System.out.println(a + " - " + b + " = " + res);
+    public ArithmeticCalculator subtraction(ArithmeticCalculator b) {
+        return new ArithmeticCalculator(number - b.number);
     }
 
-    public void multiplication() {
-        double res = a * b;
-        System.out.println(a + " * " + b + " = " + res);
+    public ArithmeticCalculator multiplication(ArithmeticCalculator c) {
+        return new ArithmeticCalculator(number * c.number);
     }
 
-    public void division() {
-        double res = a / b;
-        System.out.println(a + " / " + b + " = " + res);
+    public ArithmeticCalculator division(ArithmeticCalculator d) {
+        return new ArithmeticCalculator(number / d.number);
     }
 
-    public double comparison() {
-        if (a > b) {
-            System.out.println(a + " > " + b);
-        } else if (a < b) {
-            System.out.println(a + " < " + b);
+    public boolean comparison(ArithmeticCalculator e) {
+        if (number > e.number) {
+            return number > e.number;
+        } else if (number < e.number) {
+            return number < e.number;
         } else
-            System.out.println(a + " = " + b);
-        return 0;
-    }
-
-    public static void main(String[] args) {
-        ArithmeticCalculator calc = new ArithmeticCalculator(26.9, 12.7);
-        calc.addition();
-        calc.comparison();
-        calc.division();
-        calc.multiplication();
-        calc.subtraction();
+            return number == e.number;
     }
 }
