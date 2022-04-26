@@ -22,7 +22,7 @@ public class Matrix {
         System.out.println();
     }
 
-    public void addition(Matrix matrix2) {
+    public void add(Matrix matrix2) {
         sum = new int[row][column];
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
@@ -38,7 +38,7 @@ public class Matrix {
         }
     }
 
-    public void multiplication(Matrix matrix2) {
+    public void multi(Matrix matrix2) {
         multi = new int[row][column];
         if (matrix2.row == row && matrix2.column == column) {
             for (int i = 0; i < row; i++) {
@@ -81,8 +81,8 @@ public class Matrix {
         Matrix m2 = new Matrix(3, 3);
         Matrix m3 = new Matrix(3, 4);
         m1.transposed();
-        m1.addition(m2);
-        m1.multiplication(m2);
-        m2.multiplication(m3);
+        m1.add(m2);
+        m1.multi(m2);
+        m2.multi(m3);
     }
 }
