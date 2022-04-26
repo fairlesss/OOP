@@ -1,60 +1,32 @@
-import java.util.Random;
-import java.util.Scanner;
-
 public class Matrix {
-    public Scanner scan = new Scanner(System.in);
-    public int matrix1[][], matrix2[][], sum[][], multi[][];
-    public int row, column;
-    public Random random = new Random();
+    private int matrix[][], sum[][], multi[][];
+    private int row, column;
 
-    public void create() {
-        System.out.println("Введите количество строк: ");
-        row = Integer.parseInt(scan.nextLine());
-        System.out.println("Введите количество столбцов: ");
-        column = Integer.parseInt(scan.nextLine());
+    public Matrix(int n, int m) {
+        row = n;
+        column = m;
+        matrix = new int[row][column];
+        //Заполнение матрицы
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                matrix[i][j] = (int) (Math.random() * 100);
+            }
+        }
+        //Вывод элементов
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                System.out.print("\t" + matrix[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
 
-        matrix1 = new int[row][column];
-        matrix2 = new int[row][column];
+    public void addition(Matrix matrix2) {
         sum = new int[row][column];
-        multi = new int[row][column];
-
-        // Заполнение 1-й матрицы
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-                matrix1[i][j] = random.nextInt(50) + 1;
-            }
-        }
-
-        // Заполнение 2-й матрицы
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                matrix2[i][j] = random.nextInt(20) + 1;
-            }
-        }
-    }
-
-    public void display() {
-        System.out.println("\nПервая матрица :");
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                System.out.print("\t" + matrix1[i][j]);
-            }
-            System.out.println();
-        }
-
-        System.out.println("\nВторая матрица :");
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                System.out.print("\t" + matrix2[i][j]);
-            }
-            System.out.println();
-        }
-    }
-
-    public void add() {
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                sum[i][j] = matrix1[i][j] + matrix2[i][j];
+                sum[i][j] = matrix[i][j] + matrix2.matrix[i][j];
             }
         }
         System.out.println("\nСумма матриц :");
@@ -66,12 +38,13 @@ public class Matrix {
         }
     }
 
-    public void multi() {
-        if (row == column) {
+    public void multiplication(Matrix matrix2) {
+        multi = new int[row][column];
+        if (matrix2.row == row && matrix2.column == column) {
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < column; j++) {
                     for (int k = 0; k < column; k++) {
-                        multi[i][j] += matrix1[i][k] * matrix2[k][j];
+                        multi[i][j] += matrix[i][k] * matrix2.matrix[k][j];
                     }
                 }
             }
@@ -86,45 +59,30 @@ public class Matrix {
             System.out.println("\nПеремножение матриц не возможно");
     }
 
-    public void transportation() {
-        //для первой матрицы
+    public void transposed() {
         for (int i = 0; i < row; i++) {
             for (int j = i + 1; j < column; j++) {
-                int temp = matrix1[i][j];
-                matrix1[i][j] = matrix1[j][i];
-                matrix1[j][i] = temp;
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
             }
         }
-        System.out.println("\nТранспонирование первой матрицы: ");
+        System.out.println("\nТранспонированная матрица: ");
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-                System.out.printf("\t%3d", matrix1[i][j]);
-            }
-            System.out.println();
-        }
-        //для второй матрицы
-        for (int i = 0; i < row; i++) {
-            for (int j = i + 1; j < column; j++) {
-                int temp = matrix2[i][j];
-                matrix2[i][j] = matrix2[j][i];
-                matrix2[j][i] = temp;
-            }
-        }
-        System.out.println("\nТранспонирование второй матрицы: ");
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                System.out.printf("\t%3d", matrix2[i][j]);
+                System.out.printf("\t%3d", matrix[i][j]);
             }
             System.out.println();
         }
     }
 
     public static void main(String args[]) {
-        Matrix obj = new Matrix();
-        obj.create();
-        obj.display();
-        obj.add();
-        obj.multi();
-        obj.transportation();
+        Matrix m1 = new Matrix(3, 3);
+        Matrix m2 = new Matrix(3, 3);
+        Matrix m3 = new Matrix(3, 4);
+        m1.transposed();
+        m1.addition(m2);
+        m1.multiplication(m2);
+        m2.multiplication(m3);
     }
 }
