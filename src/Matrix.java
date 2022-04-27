@@ -1,5 +1,5 @@
 public class Matrix {
-    private int matrix[][];//, sum[][], multi[][]; Непонятны зачем нужны sum и multi
+    private int[][] matrix;
     private int row, column;
 
     public Matrix(int n, int m) {
@@ -22,8 +22,8 @@ public class Matrix {
         System.out.println();
     }
 
-    public void add(Matrix matrix2) {//Хочется чтобы функция возвращала  объект типа Matrix
-        sum = new int[row][column];
+    public int[][] add(Matrix matrix2) {
+        int[][] sum = new int[row][column];
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
                 sum[i][j] = matrix[i][j] + matrix2.matrix[i][j];
@@ -36,10 +36,11 @@ public class Matrix {
             }
             System.out.println();
         }
+        return sum;
     }
 
-    public void multi(Matrix matrix2) {//Хочется чтобы функция возвращала  объект типа Matrix
-        multi = new int[row][column];
+    public int[][] multi(Matrix matrix2) {
+        int[][] multi = new int[row][column];
         if (matrix2.row == row && matrix2.column == column) {
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < column; j++) {
@@ -55,8 +56,10 @@ public class Matrix {
                 }
                 System.out.println();
             }
-        } else
+        } else {
             System.out.println("\nПеремножение матриц не возможно");
+        }
+        return multi;
     }
 
     public void transposed() {
