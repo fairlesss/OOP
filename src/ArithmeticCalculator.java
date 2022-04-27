@@ -11,7 +11,7 @@ public class ArithmeticCalculator {
 //            System.out.println(numerator + "/" + denominator + " + " + a.numerator + "/" + a.denominator +
 //                    " = " + (numerator + a.numerator) + "/" + denominator);
             return new ArithmeticCalculator(numerator + a.numerator, denominator);
-        } else {
+        } else {// Вы уверены что так правильно приводить к общему знаменталю?
             return new ArithmeticCalculator(numerator + a.numerator, denominator * a.denominator);
         }
     }
