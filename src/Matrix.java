@@ -1,5 +1,5 @@
 public class Matrix {
-    private int matrix[][], sum[][], multi[][];
+    private int matrix[][];//, sum[][], multi[][]; Непонятны зачем нужны sum и multi
     private int row, column;
 
     public Matrix(int n, int m) {
@@ -22,7 +22,7 @@ public class Matrix {
         System.out.println();
     }
 
-    public void add(Matrix matrix2) {
+    public void add(Matrix matrix2) {//Хочется чтобы функция возвращала  объект типа Matrix
         sum = new int[row][column];
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
@@ -38,7 +38,7 @@ public class Matrix {
         }
     }
 
-    public void multi(Matrix matrix2) {
+    public void multi(Matrix matrix2) {//Хочется чтобы функция возвращала  объект типа Matrix
         multi = new int[row][column];
         if (matrix2.row == row && matrix2.column == column) {
             for (int i = 0; i < row; i++) {
