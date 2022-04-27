@@ -1,40 +1,39 @@
 public class ArithmeticCalculator {
-    private int numerator, denominator;
+    private int num, den;
 
     public ArithmeticCalculator(int numerator, int denominator) {
-        this.numerator = numerator;
-        this.denominator = denominator;
+        this.num = numerator;
+        this.den = denominator;
     }
 
     public ArithmeticCalculator addition(ArithmeticCalculator a) {
-        if (denominator == a.denominator) {
-//            System.out.println(numerator + "/" + denominator + " + " + a.numerator + "/" + a.denominator +
-//                    " = " + (numerator + a.numerator) + "/" + denominator);
-            return new ArithmeticCalculator(numerator + a.numerator, denominator);
-        } else {// Вы уверены что так правильно приводить к общему знаменталю?
-            return new ArithmeticCalculator(numerator + a.numerator, denominator * a.denominator);
+        if (den == a.den) {
+//          System.out.println(num + "/" + den + " + " + a.num + "/" + a.den + " = " + (num + a.num) + "/" + den);
+            return new ArithmeticCalculator(num + a.num, den);
+        } else {
+            return new ArithmeticCalculator((num * a.den) + (a.num * den), den * a.den);
         }
     }
 
     public ArithmeticCalculator subtraction(ArithmeticCalculator b) {
-        if (denominator == b.denominator) {
-            return new ArithmeticCalculator(numerator - b.numerator, denominator);
+        if (den == b.den) {
+            return new ArithmeticCalculator(num - b.num, den);
         } else {
-            return new ArithmeticCalculator(numerator - b.numerator, denominator * b.denominator);
+            return new ArithmeticCalculator((num * b.den) - (b.num * den), den * b.den);
         }
     }
 
     public ArithmeticCalculator multiplication(ArithmeticCalculator c) {
-        return new ArithmeticCalculator(numerator * c.numerator, denominator * c.denominator);
+        return new ArithmeticCalculator(num * c.num, den * c.den);
     }
 
     public ArithmeticCalculator division(ArithmeticCalculator d) {
-        return new ArithmeticCalculator(numerator * d.denominator, d.numerator * denominator);
+        return new ArithmeticCalculator(num * d.den, d.num * den);
     }
 
     public boolean comparison(ArithmeticCalculator e) {
-        double number1 = numerator / denominator;
-        double number2 = e.numerator / e.denominator;
+        double number1 = num / den;
+        double number2 = e.num / e.den;
         if (number1 > number2) {
             return number1 > number2;
         } else if (number2 < number2) {
