@@ -1,33 +1,46 @@
 public class ArithmeticCalculator {
-    private double number; 
+    private int numerator, denominator;
 
-    public ArithmeticCalculator(double number) {// Конструктор принимает на вхлд два числа : числитель и знаментатель
-        this.number = number;
+    public ArithmeticCalculator(int numerator, int denominator) {
+        this.numerator = numerator;
+        this.denominator = denominator;
     }
 
-    public ArithmeticCalculator addition(ArithmeticCalculator a) {//Хочется чтобы все таки была возможность складывать так:
-    // 2/3+4/5 = 10/15+12/15 = 22/15 И возвращался объект имеено в таком виде. С отсальными методами такая же проблема
-        return new ArithmeticCalculator(number + a.number);
+    public ArithmeticCalculator addition(ArithmeticCalculator a) {
+        if (denominator == a.denominator) {
+//            System.out.println(numerator + "/" + denominator + " + " + a.numerator + "/" + a.denominator +
+//                    " = " + (numerator + a.numerator) + "/" + denominator);
+            return new ArithmeticCalculator(numerator + a.numerator, denominator);
+        } else {
+            return new ArithmeticCalculator(numerator + a.numerator, denominator * a.denominator);
+        }
     }
 
     public ArithmeticCalculator subtraction(ArithmeticCalculator b) {
-        return new ArithmeticCalculator(number - b.number);
+        if (denominator == b.denominator) {
+            return new ArithmeticCalculator(numerator - b.numerator, denominator);
+        } else {
+            return new ArithmeticCalculator(numerator - b.numerator, denominator * b.denominator);
+        }
     }
 
     public ArithmeticCalculator multiplication(ArithmeticCalculator c) {
-        return new ArithmeticCalculator(number * c.number);
+        return new ArithmeticCalculator(numerator * c.numerator, denominator * c.denominator);
     }
 
     public ArithmeticCalculator division(ArithmeticCalculator d) {
-        return new ArithmeticCalculator(number / d.number);
+        return new ArithmeticCalculator(numerator * d.denominator, d.numerator * denominator);
     }
 
     public boolean comparison(ArithmeticCalculator e) {
-        if (number > e.number) {
-            return number > e.number;
-        } else if (number < e.number) {
-            return number < e.number;
-        } else
-            return number == e.number;
+        double number1 = numerator / denominator;
+        double number2 = e.numerator / e.denominator;
+        if (number1 > number2) {
+            return number1 > number2;
+        } else if (number2 < number2) {
+            return number2 < number2;
+        } else {
+            return number1 == number2;
+        }
     }
 }
