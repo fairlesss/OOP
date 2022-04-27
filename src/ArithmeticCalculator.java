@@ -1,11 +1,12 @@
 public class ArithmeticCalculator {
-    private double number;
+    private double number; 
 
-    public ArithmeticCalculator(double number) {
+    public ArithmeticCalculator(double number) {// Конструктор принимает на вхлд два числа : числитель и знаментатель
         this.number = number;
     }
 
-    public ArithmeticCalculator addition(ArithmeticCalculator a) {
+    public ArithmeticCalculator addition(ArithmeticCalculator a) {//Хочется чтобы все таки была возможность складывать так:
+    // 2/3+4/5 = 10/15+12/15 = 22/15 И возвращался объект имеено в таком виде. С отсальными методами такая же проблема
         return new ArithmeticCalculator(number + a.number);
     }
 
