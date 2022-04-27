@@ -6,45 +6,49 @@ public class Matrix {
         row = n;
         column = m;
         matrix = new int[row][column];
-        //Заполнение матрицы
+
+        //Заполнение и печать матрицы
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
                 matrix[i][j] = (int) (Math.random() * 100);
-            }
-        }
-        //Вывод элементов
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
                 System.out.print("\t" + matrix[i][j]);
             }
             System.out.println();
         }
         System.out.println();
     }
-    public Matrix(int [][] arr) {//Нужно создать еще один конструктор. 
-     //Выполнить его перегрузку на случай входного аргумента массива и далее изменить методы соответсвющим образом
+
+    public Matrix(int[][] arr) {
+        this.matrix = arr;
+        row = arr.length;
+        column = arr.length;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                System.out.print("\t" + matrix[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
     public Matrix add(Matrix matrix2) {
         int[][] sum = new int[row][column];
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                sum[i][j] = matrix[i][j] + matrix2.matrix[i][j];
+        if (matrix2.row == row && matrix2.column == column) {
+            System.out.println("Сумма матриц :");
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < column; j++) {
+                    sum[i][j] = matrix[i][j] + matrix2.matrix[i][j];
+                }
             }
-        }
-        System.out.println("\nСумма матриц :");
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                System.out.print("\t" + sum[i][j]);
-            }
-            System.out.println();
-        }
-        return Matrix(sum);
+        } else
+            System.out.println("Cкладывать матрицы можно только одинаковой размерности!");
+        return new Matrix(sum);
     }
 
-    public int[][] multi(Matrix matrix2) {
+    public Matrix multi(Matrix matrix2) {
         int[][] multi = new int[row][column];
         if (matrix2.row == row && matrix2.column == column) {
+            System.out.println("Произведение матриц :");
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < column; j++) {
                     for (int k = 0; k < column; k++) {
@@ -52,20 +56,13 @@ public class Matrix {
                     }
                 }
             }
-            System.out.println("\nПроизведение матриц :");
-            for (int i = 0; i < row; i++) {
-                for (int j = 0; j < column; j++) {
-                    System.out.print("\t" + " " + multi[i][j]);
-                }
-                System.out.println();
-            }
-        } else {
-            System.out.println("\nПеремножение матриц не возможно");
-        }
-        return multi;
+        } else
+            System.out.println("Умножать матрицы можно только одинаковой размерности!");
+        return new Matrix(multi);
     }
 
     public void transposed() {
+        System.out.println("Транспонированная матрица: ");
         for (int i = 0; i < row; i++) {
             for (int j = i + 1; j < column; j++) {
                 int temp = matrix[i][j];
@@ -73,7 +70,6 @@ public class Matrix {
                 matrix[j][i] = temp;
             }
         }
-        System.out.println("\nТранспонированная матрица: ");
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
                 System.out.printf("\t%3d", matrix[i][j]);
@@ -85,10 +81,14 @@ public class Matrix {
     public static void main(String args[]) {
         Matrix m1 = new Matrix(3, 3);
         Matrix m2 = new Matrix(3, 3);
-        Matrix m3 = new Matrix(3, 4);
-        m1.transposed();
-        m1.add(m2);
-        m1.multi(m2);
-        m2.multi(m3);
+        int[][] arr = {{1, 2, 3}, {1, 3, 6}, {3, 6, 7}, {1, 2, 3}};
+        Matrix m4 = new Matrix(arr);
+        int[][] arr1 = {{1, 2, 3}, {1, 3, 6}, {3, 6, 7}};
+        Matrix m5 = new Matrix(arr1);
+
+        m1.add(m4);
+        m1.multi(m4);
+        m1.add(m5);
+        m1.multi(m5);
     }
 }
