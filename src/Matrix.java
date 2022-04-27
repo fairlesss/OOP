@@ -21,8 +21,11 @@ public class Matrix {
         }
         System.out.println();
     }
+    public Matrix(int [][] arr) {//Нужно создать еще один конструктор. 
+     //Выполнить его перегрузку на случай входного аргумента массива и далее изменить методы соответсвющим образом
+    }
 
-    public int[][] add(Matrix matrix2) {
+    public Matrix add(Matrix matrix2) {
         int[][] sum = new int[row][column];
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
@@ -36,7 +39,7 @@ public class Matrix {
             }
             System.out.println();
         }
-        return sum;
+        return Matrix(sum);
     }
 
     public int[][] multi(Matrix matrix2) {
