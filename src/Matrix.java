@@ -19,9 +19,13 @@ public class Matrix {
     }
 
     public Matrix(int[][] arr) {
-        this.matrix = arr;
+        this.matrix = arr;//В целом, так не очень хорошо делать, так как массивы являются ссылочными типами и
+        //если изменить arr где-то за пределами, то изменится и matrix, что приведет к неожиданным проблемам.
+        //Лучше выделит новую памяь и поэлементно скопировать
         row = arr.length;
         column = arr.length;
+        // Вывод матрицы лучше в отдлеьный метод,так как код дублируется здесь и в предыдущем конструкторе. 
+        //Плюс у вас будет возможность вывести когда хотите. Это Нарушение принипа Единственной ответсвенности, который можете загуглить в интернете
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
                 System.out.print("\t" + matrix[i][j]);
@@ -42,7 +46,7 @@ public class Matrix {
             }
         } else
             System.out.println("Cкладывать матрицы можно только одинаковой размерности!");
-        return new Matrix(sum);
+        return new Matrix(sum);//Должны быть разные return для разных условий
     }
 
     public Matrix multi(Matrix matrix2) {
@@ -58,7 +62,7 @@ public class Matrix {
             }
         } else
             System.out.println("Умножать матрицы можно только одинаковой размерности!");
-        return new Matrix(multi);
+        return new Matrix(multi);//Должны быть разные return для разных условий
     }
 
     public void transposed() {
