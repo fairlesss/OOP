@@ -17,8 +17,8 @@ public class Matrix {
     public Matrix(int[][] arr) {
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
-                row = arr.length;
-                column = arr[i].length;
+                // row = arr.length;
+                // column = arr[i].length; вот это действие непонятно, можно проще
             }
         }
         matrix = arr.clone();
@@ -39,6 +39,7 @@ public class Matrix {
         int[][] temp = new int[0][0];
         if (matrix2.row == row && matrix2.column == column) {
             System.out.println("Сумма матриц :");
+            //Вывод здесь не нужен нарушение принципа единственной отвественности
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < column; j++) {
                     sum[i][j] = matrix[i][j] + matrix2.matrix[i][j];
@@ -63,13 +64,13 @@ public class Matrix {
                     }
                 }
             }
-            System.out.println("Произведение матриц :");
-            for (int i = 0; i < row; i++) {
-                for (int j = 0; j < column; j++) {
-                    System.out.print("\t" + multi[i][j]);
-                }
-                System.out.println();
-            }
+            // System.out.println("Произведение матриц :");
+            // for (int i = 0; i < row; i++) {
+            //     for (int j = 0; j < column; j++) {
+            //         System.out.print("\t" + multi[i][j]);
+            //     }
+            //     System.out.println();
+            // }//вывод здесь не нужен
             return new Matrix(multi);
         } else
             System.out.println("Умножать матрицы можно только одинаковой размерности!");
@@ -105,7 +106,7 @@ public class Matrix {
         Matrix m5 = new Matrix(arr1);
         m5.print();
 
-        m1.multi(m5);
+        Matrix res = m1.multi(m5);//Нужно наверное сохранить результат как и в сложении
 //        m1.add(m5);
 //        m1.add(m4);
 //        m1.multi(m4);
