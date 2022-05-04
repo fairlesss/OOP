@@ -15,12 +15,8 @@ public class Matrix {
     }
 
     public Matrix(int[][] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
-                // row = arr.length;
-                // column = arr[i].length; вот это действие непонятно, можно проще
-            }
-        }
+        row = arr.length;
+        column = arr[0].length;
         matrix = arr.clone();
     }
 
@@ -38,14 +34,10 @@ public class Matrix {
         int[][] sum = new int[row][column];
         int[][] temp = new int[0][0];
         if (matrix2.row == row && matrix2.column == column) {
-            System.out.println("Сумма матриц :");
-            //Вывод здесь не нужен нарушение принципа единственной отвественности
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < column; j++) {
                     sum[i][j] = matrix[i][j] + matrix2.matrix[i][j];
-                    System.out.print("\t" + sum[i][j]);
                 }
-                System.out.println();
             }
             return new Matrix(sum);
         } else
@@ -59,24 +51,22 @@ public class Matrix {
         if (matrix2.row == row && matrix2.column == column) {
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < column; j++) {
-                    for (int k = 0; k < column; k++) {
-                        multi[i][j] += matrix[i][k] * matrix2.matrix[k][j];
-                    }
+                    multi[i][j] += matrix[i][j] * matrix2.matrix[i][j];
                 }
             }
-            // System.out.println("Произведение матриц :");
-            // for (int i = 0; i < row; i++) {
-            //     for (int j = 0; j < column; j++) {
-            //         System.out.print("\t" + multi[i][j]);
-            //     }
-            //     System.out.println();
-            // }//вывод здесь не нужен
             return new Matrix(multi);
         } else
             System.out.println("Умножать матрицы можно только одинаковой размерности!");
         return new Matrix(temp);
     }
 
+    public void equals(Matrix matrix2) {
+        if (matrix.equals(matrix2)) {
+            System.out.println("Матрицы равны");
+        } else {
+            System.out.println("Матрицы не равны");
+        }
+    }
 
     public void transposed() {
         System.out.println("Транспонированная матрица: ");
@@ -87,28 +77,25 @@ public class Matrix {
                 matrix[j][i] = temp;
             }
         }
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                System.out.printf("\t%3d", matrix[i][j]);
-            }
-            System.out.println();
-        }
     }
 
     public static void main(String args[]) {
         Matrix m1 = new Matrix(3, 3);
         m1.print();
 
-        int[][] arr = {{1, 2, 3}, {1, 3, 6}, {3, 6, 7}, {1, 2, 3}};
-        Matrix m4 = new Matrix(arr);
-
         int[][] arr1 = {{1, 2, 3}, {1, 3, 6}, {3, 6, 7}};
         Matrix m5 = new Matrix(arr1);
         m5.print();
 
-        Matrix res = m1.multi(m5);//Нужно наверное сохранить результат как и в сложении
-//        m1.add(m5);
-//        m1.add(m4);
-//        m1.multi(m4);
+        Matrix res = m1.multi(m5);
+        res.print();
+
+        Matrix res1 = m1.add(m5);
+        res1.print();
+
+        m1.transposed();
+        m1.print();
+
+        m1.equals(m5);
     }
 }
